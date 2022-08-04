@@ -1,26 +1,14 @@
 const { ifError } = require('assert');
 const express = require('express');
+const db = require('./db/connection');
 const inputCheck = require('./utils/inputCheck');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-const mysql = require("mysql2");
+
 //express middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
-//Connect to database
-const db = mysql.createConnection(
-    {
-        host: 'localhost',
-        //your MySQL username,
-        user: 'dirker',
-        //your MySQL password
-        password: 'Lorelei09072017!',
-        database: 'election'
-    },
-    console.log('Connected to the election database.')
-);
 
 //get all candidates
 app.get('/api/candidates', (req, res) => {
